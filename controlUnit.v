@@ -112,7 +112,7 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
         else begin //if opcode is R-type (all R-type codes have the same variables)
             
             //add
-            if() begin 
+            if(funct == 4'b0000) begin 
                 regdst = 1;
                 branch = 0;
                 memread = 0;
@@ -125,7 +125,7 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
                 invertbranch = 0;
             end 
             //sub 
-            else if () begin 
+            else if (funct == 4'b0001) begin 
                 regdst = 1;
                 branch = 0;
                 memread = 0;
@@ -138,7 +138,7 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
                 invertbranch = 0;
             end
             //sll
-            else if () begin 
+            else if (funct == 4'b0010) begin 
                 regdst = 1;
                 branch = 0;
                 memread = 0;
@@ -151,7 +151,7 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
                 invertbranch = 0;
             end
             //and 
-            else if () begin 
+            else if (funct == 4'b0011) begin 
                 regdst = 1;
                 branch = 0;
                 memread = 0;
