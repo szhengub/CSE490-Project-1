@@ -1,5 +1,5 @@
 module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, memwrite, alusrc, regwrite, jump, invertbranch);
-    input [15:12] opcode;
+    input [3:0] opcode;
     input [3:0] funct;
 
     output reg regdst;  //source for the destination register (1 for R-type, 0 for I-type)
@@ -100,7 +100,7 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
                 branch= 0;
                 memread= 0;
                 memtoreg= 0; //X
-                aluop= 2'b01; //X
+                aluop= 2'b00; //X
                 memwrite= 0;
                 alusrc= 0; //X
                 regwrite= 0;
@@ -110,16 +110,60 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
 
         end
         else begin //if opcode is R-type (all R-type codes have the same variables)
-            regdst = 1;
-            branch = 0;
-            memread = 0;
-            memtoreg = 0;
-            aluop = 2'b10;
-            memwrite = 0;
-            alusrc = 0;
-            regwrite = 1;
-            jump = 0;
-            invertbranch = 0;
+            
+            //add
+            if() begin 
+                regdst = 1;
+                branch = 0;
+                memread = 0;
+                memtoreg = 0;
+                aluop = 2'b00;
+                memwrite = 0;
+                alusrc = 0;
+                regwrite = 1;
+                jump = 0;
+                invertbranch = 0;
+            end 
+            //sub 
+            else if () begin 
+                regdst = 1;
+                branch = 0;
+                memread = 0;
+                memtoreg = 0;
+                aluop = 2'b01;
+                memwrite = 0;
+                alusrc = 0;
+                regwrite = 1;
+                jump = 0;
+                invertbranch = 0;
+            end
+            //sll
+            else if () begin 
+                regdst = 1;
+                branch = 0;
+                memread = 0;
+                memtoreg = 0;
+                aluop = 2'b10;
+                memwrite = 0;
+                alusrc = 0;
+                regwrite = 1;
+                jump = 0;
+                invertbranch = 0;
+            end
+            //and 
+            else if () begin 
+                regdst = 1;
+                branch = 0;
+                memread = 0;
+                memtoreg = 0;
+                aluop = 2'b11;
+                memwrite = 0;
+                alusrc = 0;
+                regwrite = 1;
+                jump = 0;
+                invertbranch = 0;              
+            end 
+
         end
       
 
@@ -127,5 +171,4 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
    
  
 endmodule
-
 
