@@ -1,4 +1,4 @@
-module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, alusrc, regwrite, jump, invertbranch);
+module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, alusrc, regwrite, jump, bne);
     input [3:0] opcode;
     input [3:0] funct;
 
@@ -10,7 +10,7 @@ module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, a
     output reg alusrc; // source for alu operand 2, 1 for immediate, 0 for register 2
     output reg regwrite; //are we writing back to register? 1 for yes
     output reg jump; //are we unconditional jumping? 1 for yes
-    output reg invertbranch; //differentiate between beq and bne, 1 for bne, 0 for beq
+    output reg bne; //differentiate between beq and bne, 1 for bne, 0 for beq
 
     always @(*) begin
 
@@ -23,7 +23,7 @@ module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, a
         alusrc = 0;
         regwrite = 0;
         jump = 0;
-        invertbranch = 0;
+        bne = 0;
         
         if (opcode != 4'b0000) begin //if the opcode ISNT R-type (handle all i/j type)
 
@@ -37,7 +37,7 @@ module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, a
                 alusrc= 1;
                 regwrite= 1;
                 jump= 0;
-                invertbranch = 0;
+                bne = 0;
             end
             //sw
             else if (opcode == 4'b0010) begin 
@@ -49,7 +49,7 @@ module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, a
                 alusrc = 1;
                 regwrite = 0;
                 jump = 0;
-                invertbranch = 0;
+                bne = 0;
             end
             //addi 
             else if (opcode == 4'b0011) begin 
@@ -61,7 +61,7 @@ module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, a
                 alusrc= 1;
                 regwrite= 1;
                 jump= 0;
-                invertbranch = 0;
+                bne = 0;
             end 
             //beq 
             else if (opcode == 4'b0100) begin 
@@ -73,7 +73,7 @@ module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, a
                 alusrc= 0;
                 regwrite= 0;
                 jump= 0;
-                invertbranch = 0;
+                bne = 0;
             end
             //bne 
             else if (opcode == 4'b0101) begin 
@@ -85,7 +85,7 @@ module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, a
                 alusrc= 0;
                 regwrite= 0;
                 jump= 0;
-                invertbranch = 1;
+                bne = 1;
             end 
             //jmp (0110)
             else if (opcode == 4'b0110) begin 
@@ -97,7 +97,7 @@ module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, a
                 alusrc= 0; //X
                 regwrite= 0;
                 jump= 1;
-                invertbranch = 0;
+                bne = 0;
             end  
 
         end
@@ -113,7 +113,7 @@ module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, a
                 alusrc = 0;
                 regwrite = 1;
                 jump = 0;
-                invertbranch = 0;
+                bne = 0;
             end 
             //sub 
             else if (funct == 4'b0001) begin 
@@ -125,7 +125,7 @@ module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, a
                 alusrc = 0;
                 regwrite = 1;
                 jump = 0;
-                invertbranch = 0;
+                bne = 0;
             end
             //sll
             else if (funct == 4'b0010) begin 
@@ -137,7 +137,7 @@ module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, a
                 alusrc = 0;
                 regwrite = 1;
                 jump = 0;
-                invertbranch = 0;
+                bne = 0;
             end
             //and 
             else if (funct == 4'b0011) begin 
@@ -149,7 +149,7 @@ module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, a
                 alusrc = 0;
                 regwrite = 1;
                 jump = 0;
-                invertbranch = 0;              
+                bne = 0;              
             end 
 
         end
