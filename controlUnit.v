@@ -1,8 +1,7 @@
-module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, memwrite, alusrc, regwrite, jump, invertbranch);
+module controlUnit (opcode, funct, branch, memread, memtoreg, aluop, memwrite, alusrc, regwrite, jump, invertbranch);
     input [3:0] opcode;
     input [3:0] funct;
 
-    output reg regdst;  //source for the destination register (1 for R-type, 0 for I-type)
     output reg branch; //are we branches? 1 for yes
     output reg memread; //are we reading memory? 1 for yes
     output reg memtoreg; //which value to write back to reg? 1 for memory, 0 for ALU 
@@ -16,7 +15,6 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
     always @(*) begin
 
         //maybe set some default values here?
-        regdst = 0;
         branch = 0;
         memread = 0;
         memtoreg = 0;
@@ -31,7 +29,6 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
 
             //lw
             if (opcode == 4'b0001) begin 
-                regdst= 0;
                 branch= 0;
                 memread= 1;
                 memtoreg= 1;
@@ -44,7 +41,6 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
             end
             //sw
             else if (opcode == 4'b0010) begin 
-                regdst= 0; //X
                 branch= 0;
                 memread= 0;
                 memtoreg= 1; //X
@@ -57,7 +53,6 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
             end
             //addi 
             else if (opcode == 4'b0011) begin 
-                regdst= 0;
                 branch= 0;
                 memread= 0;
                 memtoreg= 0;
@@ -70,7 +65,6 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
             end 
             //beq 
             else if (opcode == 4'b0100) begin 
-                regdst=0; //X
                 branch= 1;
                 memread= 0;
                 memtoreg= 0; //X
@@ -83,7 +77,6 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
             end
             //bne 
             else if (opcode == 4'b0101) begin 
-                regdst=0; //X
                 branch= 1;
                 memread= 0;
                 memtoreg= 0; //X
@@ -96,7 +89,6 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
             end 
             //jmp (0110)
             else if (opcode == 4'b0110) begin 
-                regdst=0; //X
                 branch= 0;
                 memread= 0;
                 memtoreg= 0; //X
@@ -113,7 +105,6 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
             
             //add
             if(funct == 4'b0000) begin 
-                regdst = 1;
                 branch = 0;
                 memread = 0;
                 memtoreg = 0;
@@ -126,7 +117,6 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
             end 
             //sub 
             else if (funct == 4'b0001) begin 
-                regdst = 1;
                 branch = 0;
                 memread = 0;
                 memtoreg = 0;
@@ -139,7 +129,6 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
             end
             //sll
             else if (funct == 4'b0010) begin 
-                regdst = 1;
                 branch = 0;
                 memread = 0;
                 memtoreg = 0;
@@ -152,7 +141,6 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
             end
             //and 
             else if (funct == 4'b0011) begin 
-                regdst = 1;
                 branch = 0;
                 memread = 0;
                 memtoreg = 0;
@@ -171,4 +159,3 @@ module controlUnit (opcode, funct, regdst, branch, memread, memtoreg, aluop, mem
    
  
 endmodule
-
