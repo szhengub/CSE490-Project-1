@@ -1,7 +1,7 @@
-module pc(clock, pcPlusTwo, reset, currentPc);
+module pc(clock, reset, pcPlusTwo, currentPc);
     input clock; //is the clock for the pc (1 is up tic, 0 is down tic)
-    input [15:0] pcPlusTwo; //the PC which we calculated in the prev cycle
     input reset; //are we resetting the circuit? (1==yes, 0==no)
+    input [15:0] pcPlusTwo; //the PC which we calculated in the prev cycle
     output reg [15:0] currentPc; //the pc which we'll use in the next cycle
 
     //updates the pc upon every clock tic
