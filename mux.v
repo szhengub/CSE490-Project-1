@@ -1,17 +1,16 @@
-module mux (chosenPath, a, b, selector);
-    input [15:0] a, b;
+module mux (selector, choosePath0, choosePath1, chosenPath);
     input selector;
-
-    output [15:0] chosenPath;
-    reg [15:0] chosenPath;
+    input [15:0] choosePath0;
+    input [15:0] choosePath1;
+    output reg [15:0] chosenPath;
 
 
     always @(*) begin
         if (selector == 0) begin 
-            chosenPath = a;
+            chosenPath = choosePath0;
         end
         else begin 
-            chosenPath = b;
+            chosenPath = choosePath1;
         end
     end 
 
