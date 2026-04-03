@@ -18,3 +18,21 @@ module mux (selector, choosePath0, choosePath1, chosenPath);
 endmodule
 
 
+module muxOneBit (selector, choosePath0, choosePath1, chosenPath);
+    input selector;
+    input choosePath0;
+    input choosePath1;
+    output reg chosenPath;
+
+
+    always @(*) begin
+        if (selector == 0) begin 
+            chosenPath = choosePath0;
+        end
+        else begin 
+            chosenPath = choosePath1;
+        end
+    end 
+
+
+endmodule
