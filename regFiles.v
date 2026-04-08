@@ -1,4 +1,4 @@
-module registers(clock, regWrite, readReg1, readReg2, dataToWrite);
+module registers(clock, regWrite, readReg1, readReg2, dataToWrite, regData1, regData2);
 
     input clock;
     input regWrite; //(Control Unit) are we writing to register?
