@@ -5,11 +5,12 @@ module instructionMemory(pcAddress, instruction);
 
     //64 Byte memory is the minimum
     reg [15:0] memory [0:31];
+    integer i;
 
     initial begin 
 
         //clear the instructions
-        integer i;
+
 
         for (i=0; i<32; i=i+1) begin 
             memory[i] = 16'b0;
