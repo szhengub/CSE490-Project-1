@@ -141,7 +141,6 @@ module datapath(clock, reset);
 
     //////////////////////////////
     /////////Data Memory//////////
-    //////TEMPORARY VALUES////////
     //////////////////////////////
         //input: clock [1]
         //input: memWrite [1]
