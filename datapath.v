@@ -51,7 +51,6 @@ module datapath(clock, reset);
 
     //////////////////////////////
     //////Instruction Memory//////
-    //////TEMPORARY VALUES////////
     //////////////////////////////
         //input: pcAddress [16]
         //output: instruction [16]
@@ -90,18 +89,15 @@ module datapath(clock, reset);
 
     //////////////////////////////
     ////////Register File//////////
-    //////TEMPORARY VALUES////////
     //////////////////////////////
         //input: clock [1]
-        //input: reset [1]
         //input: regwrite [1]
         //input: readReg1 [4] (rs) 
         //input: readReg2 [4] (rt/rd) 
-        //input: regToWrite [4] (rt/rd) 
         //input: dataToWrite [16]
         //output: regData1 [16]
         //output: regData2 [16]
-    registers myReg(clock, reset, regwrite, instruction[7:4], instruction[11:8], instruction[11:8], dataRegWriteback, readData1, readData2);
+    registers myReg(clock, regwrite, instruction[7:4], instruction[11:8],  dataRegWriteback, readData1, readData2);
         //readData1 [16]
         //readData2 [16]
 
